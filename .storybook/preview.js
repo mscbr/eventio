@@ -1,14 +1,13 @@
 import React from 'react';
-import Normalize from 'themming/normalize';
+import { addDecorator } from '@storybook/react';
 import GlobalStyle from 'themming/globalStyle';
+import Normalize from 'themming/normalize';
 
-const App = () => {
+addDecorator(storyFn => {
   return (
     <Normalize>
       <GlobalStyle />
-      <div />
+      {storyFn()}
     </Normalize>
   );
-};
-
-export default App;
+});
