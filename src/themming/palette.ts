@@ -1,8 +1,10 @@
 const palette = {
-  surface: '#F2F2F2',
+  surface: '#FFFFFF',
   data: '#323C46',
   label: '#C9CED3',
-  underline: '#979797',
+  labelActive: '#D2D6DA',
+  underlineActive: '#323C46',
+  underline: '#DAE1E7',
   pink: '#FF4081',
 };
 
