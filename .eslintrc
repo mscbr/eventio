@@ -71,6 +71,7 @@
     "react/jsx-one-expression-per-line": "off",
     "no-console": "warn",
     "react/jsx-wrap-multilines": "off",
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "import/no-unresolved": "off"
   }
 }
