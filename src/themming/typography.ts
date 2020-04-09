@@ -1,6 +1,6 @@
 import { pxToRem } from 'shared/helpers';
 
-export const typography = {
+const typography = {
   fontFamily: {
     hind: '"Hind", sans-serif',
     playfairDisplay: '"Playfair Display", serif',
@@ -21,3 +21,4 @@ export const typography = {
     1: pxToRem(1),
   },
 };
+export default typography;

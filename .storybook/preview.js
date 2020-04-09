@@ -1,18 +1,17 @@
 import React from 'react';
+import { addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import Normalize from 'themming/normalize';
 import GlobalStyle from 'themming/globalStyle';
 import theme from 'themming';
 
-const App = () => {
+addDecorator(storyFn => {
   return (
     <ThemeProvider theme={theme}>
       <Normalize>
         <GlobalStyle />
-        <div />
+        {storyFn()}
       </Normalize>
     </ThemeProvider>
   );
-};
-
-export default App;
+});
