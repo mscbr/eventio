@@ -77,9 +77,6 @@ interface Props {
 const TextInput = (props: Props) => {
   const { id, label, value, onChange, error, helperText, type, icon } = props;
   const [active, setActive] = useState(false);
-  // useEffect(() => {
-  //   value ? setActive(true) : setActive(false);
-  // }, [value]);
   return (
     <StyledTextInput active={active} error={error} value={value}>
       <div className="inputWrapper">
