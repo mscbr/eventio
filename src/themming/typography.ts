@@ -17,6 +17,7 @@ const typography = {
     18: pxToRem(18),
     16: pxToRem(16),
     14: pxToRem(14),
+    12: pxToRem(12),
   },
   letterSpacing: {
     1: pxToRem(1),
