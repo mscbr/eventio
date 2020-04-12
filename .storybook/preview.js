@@ -5,9 +5,9 @@ import Normalize from 'themming/normalize';
 
 addDecorator(storyFn => {
   return (
-    <Normalize>
+    <>
       <GlobalStyle />
       {storyFn()}
-    </Normalize>
+    </>
   );
 });

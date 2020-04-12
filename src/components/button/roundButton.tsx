@@ -4,6 +4,9 @@ import theme from 'themming';
 import iconAdd from 'assets/icons/icon-add.png';
 
 const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 56px;
   height: 56px;
   background: ${theme.palette.data};

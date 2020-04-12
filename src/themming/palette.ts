@@ -2,6 +2,8 @@ const palette = {
   surface: '#FFFFFF',
   data: '#323C46',
   dataHover: '#565D5A',
+  dropdown: '#949EA8',
+  link: '#9CA5AF',
   label: '#C9CED3',
   labelActive: '#D2D6DA',
   underlineActive: '#323C46',
