@@ -8,12 +8,15 @@ const StyledButton = styled.button`
   color: ${theme.palette.pink};
   background: transparent;
   display: flex;
+  align-items: center;
+  font-family: ${theme.typography.fontFamily.hind};
   font-size: ${theme.typography.fontSize[12]};
   font-weight: ${theme.typography.fontWeight.medium};
   letter-spacing: ${theme.typography.letterSpacing[1]};
   border: none;
   span {
     margin-left: 12px;
+    margin-top: 4px;
   }
   &:hover {
     cursor: pointer;
