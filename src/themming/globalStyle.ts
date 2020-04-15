@@ -26,6 +26,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
+    font-family: ${theme.typography.fontFamily.hind};
+    letter-spacing: ${theme.typography.letterSpacing[0.7]}
   }
 
   /**

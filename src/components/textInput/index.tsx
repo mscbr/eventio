@@ -8,7 +8,7 @@ const StyledTextInput = styled.div<{
   value?: string;
 }>`
   width: 100%;
-  height: 88px;
+  height: 32px;
   font-family: ${theme.typography.fontFamily.hind};
   .inputWrapper {
     position: relative;
@@ -16,21 +16,30 @@ const StyledTextInput = styled.div<{
   }
   label {
     position: absolute;
-    bottom: ${props => (!props.active && !props.value ? 'initial' : '33px')};
+    bottom: ${props => (!props.active && !props.value ? 'initial' : '42px')};
     font-size: ${props =>
-      !props.active
-        ? `${theme.typography.fontSize[18]}`
+      !props.active && !props.value
+        ? `${theme.typography.fontSize[16]}`
         : `${theme.typography.fontSize[14]}`};
+    font-weight: ${theme.typography.fontWeight.light};
+    letter-spacing: ${theme.typography.letterSpacing[1]};
     color: ${props =>
-      !props.active
+      !props.active && !props.value
         ? `${theme.palette.label}`
         : `${theme.palette.labelActive}`};
     transition: font-size 0.2s;
+    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+      font-size: ${props =>
+        !props.active && !props.value
+          ? `${theme.typography.fontSize[18]}`
+          : `${theme.typography.fontSize[14]}`};
+    }
   }
   input {
     height: 33px;
     width: 100%;
-    font-size: ${theme.typography.fontSize[18]};
+    font-size: ${theme.typography.fontSize[16]};
+
     color: ${theme.palette.data};
     caret-color: ${theme.palette.label};
     border: none;
@@ -46,6 +55,10 @@ const StyledTextInput = styled.div<{
       return `${theme.palette.underline}`;
     }};
     transition: 0.3s;
+    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+      font-size: ${theme.typography.fontSize[18]};
+    }
+    margin-bottom: 8px;
   }
   .inputIcon {
     position: absolute;
@@ -59,7 +72,11 @@ const StyledTextInput = styled.div<{
   }
   .helperText {
     color: ${theme.palette.pink};
-    font-size: ${theme.typography.fontSize[18]};
+    font-size: ${theme.typography.fontSize[16]};
+    font-weight: ${theme.typography.fontWeight.light};
+    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+      font-size: ${theme.typography.fontSize[18]};
+    }
   }
 `;
 
@@ -68,17 +85,36 @@ interface Props {
   label: string;
   value?: string;
   onChange: (value: string) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
   helperText?: string;
   type?: string;
   icon?: JSX.Element;
+  className?: string;
+  name?: string;
 }
 
 const TextInput = (props: Props) => {
-  const { id, label, value, onChange, error, helperText, type, icon } = props;
+  const {
+    id,
+    label,
+    value,
+    onChange,
+    onBlur,
+    error,
+    helperText,
+    type,
+    icon,
+    className,
+  } = props;
   const [active, setActive] = useState(false);
   return (
-    <StyledTextInput active={active} error={error} value={value}>
+    <StyledTextInput
+      active={active}
+      error={error}
+      value={value}
+      className={className}
+    >
       <div className="inputWrapper">
         <label htmlFor={id}>{label}</label>
         <input
@@ -87,7 +123,10 @@ const TextInput = (props: Props) => {
           onChange={e => onChange(e.target.value)}
           type={type || 'text'}
           onFocus={() => setActive(true)}
-          onBlur={() => setActive(false)}
+          onBlur={e => {
+            setActive(false);
+            onBlur && onBlur(e);
+          }}
         />
         {icon && <div className="inputIcon">{icon}</div>}
       </div>
