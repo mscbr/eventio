@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from 'themming';
-import Spinner from './parts/spinner';
+import Spinner from 'components/spinner';
 
 const StyledButton = styled.button<{ color?: string; size?: string }>`
   display: flex;
@@ -53,16 +53,18 @@ interface Props {
   label?: string;
   onClick?: () => void;
   loading?: boolean;
+  className?: string;
 }
 
 const Button = (props: Props) => {
-  const { color, size, label, onClick, loading } = props;
+  const { color, size, label, onClick, loading, className } = props;
   return (
     <StyledButton
       size={size}
       color={color}
       onClick={onClick}
       disabled={loading}
+      className={className}
     >
       {!loading ? label && label.toUpperCase() : <Spinner />}
     </StyledButton>
