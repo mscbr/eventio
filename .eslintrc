@@ -89,6 +89,10 @@
     ],
     "jsx-a11y/click-events-have-key-events": "off",
     "indent": "off",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "no-param-reassign": "off",
+    "consistent-return": "off",
+    "prefer-const": "off",
+    "no-underscore-dangle": "off"
   }
 }
