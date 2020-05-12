@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default { title: 'Atom/Button' };
+export default { title: 'Atoms/Button' };
 
 export const RegularButton = () => {
   return (

@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   width: 50%;
 `;
 
-export default { title: 'Atom/Textfield' };
+export default { title: 'Atoms/Textfield' };
 
 export const BasicTextInput = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -22,6 +22,9 @@ export const BasicTextInput = () => {
         value={inputValue}
         onChange={value => setInputValue(value)}
       />
+      <br />
+      <br />
+      <br />
       <TextInput
         id="basicTextInput2"
         label="Error input"
@@ -30,6 +33,9 @@ export const BasicTextInput = () => {
         error
         helperText="Incorect input value"
       />
+      <br />
+      <br />
+      <br />
       <TextInput
         id="passwordInput"
         label="Password"

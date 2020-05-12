@@ -19,7 +19,7 @@ const StyledLayout = styled.div`
     width: 100%;
     height: 100vh;
   }
-  @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+  @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
     .leftPanel {
       display: inline;
     }
