@@ -30,7 +30,7 @@ const PanelWrapper = styled.div`
     align-items: flex-start;
     justify-content: space-around;
     width: 100%;
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       max-width: 480px;
       width: 65%;
     }
@@ -39,7 +39,7 @@ const PanelWrapper = styled.div`
     width: 100%;
     margin-bottom: 45px;
     text-align: center;
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       text-align: left;
     }
   }
@@ -55,7 +55,7 @@ const PanelWrapper = styled.div`
   }
   .btn {
     width: 100%;
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       margin-top: 10px;
     }
   }
@@ -63,13 +63,13 @@ const PanelWrapper = styled.div`
 
 const CenteredButton = styled(Button)`
   margin: 0 auto;
-  @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+  @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
     margin: initial;
   }
 `;
 const CenteredLink = styled(SignupLink)`
   margin: 0 auto 45px;
-  @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+  @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
     position: absolute;
     top: 40px;
     right: 40px;

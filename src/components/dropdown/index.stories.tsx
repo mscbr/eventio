@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default { title: 'Atom/Dropdown' };
+export default { title: 'Atoms/Dropdown' };
 
 export const Menu = () => {
   const [filterType, setFilterType] = useState('ALL EVENTS');

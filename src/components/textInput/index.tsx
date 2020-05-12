@@ -28,7 +28,7 @@ const StyledTextInput = styled.div<{
         ? `${theme.palette.label}`
         : `${theme.palette.labelActive}`};
     transition: font-size 0.2s;
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       font-size: ${props =>
         !props.active && !props.value
           ? `${theme.typography.fontSize[18]}`
@@ -55,7 +55,7 @@ const StyledTextInput = styled.div<{
       return `${theme.palette.underline}`;
     }};
     transition: 0.3s;
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       font-size: ${theme.typography.fontSize[18]};
     }
     margin-bottom: 8px;
@@ -74,7 +74,7 @@ const StyledTextInput = styled.div<{
     color: ${theme.palette.pink};
     font-size: ${theme.typography.fontSize[16]};
     font-weight: ${theme.typography.fontWeight.light};
-    @media only screen and (min-width: ${theme.breakpoints.mobile}) {
+    @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
       font-size: ${theme.typography.fontSize[18]};
     }
   }

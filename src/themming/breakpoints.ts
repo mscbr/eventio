@@ -1,5 +1,5 @@
 const breakpoints = {
-  mobile: '600px',
+  mobile: 600,
 };
 
 export default breakpoints;
