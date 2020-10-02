@@ -30,3 +30,13 @@ export const toDeepString = (object: { [key: string]: any }): string => {
 export const deepCompareObj = (obj1: object, obj2: object): boolean => {
   return toDeepString(obj1) === toDeepString(obj2);
 };
+
+export const handleClickOutside = (
+  e: MouseEvent,
+  ref: React.RefObject<HTMLElement>,
+  callback: () => void
+) => {
+  if (ref.current && !ref.current.contains(e.target as Node)) {
+    callback();
+  }
+};

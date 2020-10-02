@@ -13,3 +13,9 @@ export interface IEventList {
 }
 
 export type ViewType = 'list' | 'grid';
+
+export enum EFilterTypes {
+  all = 'All Events',
+  future = 'Future Events',
+  past = 'Past Events',
+}

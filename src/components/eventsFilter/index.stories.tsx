@@ -1,29 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { ViewType, IEventList, EFilterTypes } from 'types/event';
 import { mockEventsList } from 'shared/mockData/events';
-import ViewSwitch from 'components/viewSwitch';
-import EventsFilter from 'components/eventsFilter';
-import EventComponent from './index';
+import { IEventList, EFilterTypes } from 'types/event';
+import EventsFilterComponent from './index';
 
-export default { title: 'Molecules' };
+export default { title: 'Atoms/Filter' };
 
 const StyledWrapper = styled.div`
-  width: 92%;
-  margin: 0 20px;
-  & > div {
-    margin-top: 20px;
-  }
-`;
-const StyledTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  margin: 20px;
 `;
 
-export const Events = () => {
-  const [view, setView] = useState<ViewType>('grid');
+export const EventsFilter = () => {
   const [events, setEvents] = useState<IEventList[]>(mockEventsList);
 
   const filterData = (data: IEventList[]) => {
@@ -46,12 +34,13 @@ export const Events = () => {
 
   return (
     <StyledWrapper>
-      <StyledTop>
-        <EventsFilter onChange={filterData(mockEventsList)} />
-        <ViewSwitch viewType={view} onChange={setView} />
-      </StyledTop>
+      <EventsFilterComponent onChange={filterData(mockEventsList)} />
       {events.map(event => (
-        <EventComponent key={event.id} event={event} viewType={view} />
+        <div key={event.id}>
+          <br />
+          {event.startsAt}
+          <br />
+        </div>
       ))}
     </StyledWrapper>
   );
