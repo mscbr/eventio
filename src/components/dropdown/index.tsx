@@ -1,7 +1,9 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import styled from 'styled-components';
+
 import iconArrow from 'assets/icons/icon-arrow.png';
 import iconArrowDark from 'assets/icons/icon-arrow-dark.png';
+import { handleClickOutside } from 'shared/helpers';
 import Overlay from './parts/overlay';
 
 const StyledDropdown = styled.div`
@@ -32,32 +34,15 @@ interface Props {
   adornment?: JSX.Element;
 }
 
-const Dropdown = (props: Props) => {
-  const { label, items, dark, adornment } = props;
+const Dropdown = ({ label, items, dark, adornment }: Props) => {
   const [open, setOpen] = useState(false);
   const [headWidth, setHeadWidth] = useState<number>();
   const headRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // function could be defined more globally, but
-  // haven't seen another use in the design
-  const handleClickOutside = (
-    e: MouseEvent,
-    ref: React.RefObject<HTMLElement>,
-    callback: () => void
-  ) => {
-    if (ref.current && !ref.current.contains(e.target as Node)) {
-      callback();
-    }
-  };
-
   useLayoutEffect(() => {
     setHeadWidth(headRef.current?.getBoundingClientRect().width);
-  });
-
-  useEffect(() => {
-    setOpen(false);
-  }, [props.label]);
+  }, [setHeadWidth]);
 
   useEffect(() => {
     document.addEventListener('mousedown', (e: MouseEvent) =>
@@ -69,6 +54,7 @@ const Dropdown = (props: Props) => {
       );
     };
   }, []);
+
   return (
     <StyledDropdown ref={dropdownRef}>
       <StyledHead onClick={() => setOpen(state => !state)} ref={headRef} dark>
@@ -78,7 +64,11 @@ const Dropdown = (props: Props) => {
           <img src={dark ? iconArrowDark : iconArrow} alt="arrow icon" />
         </div>
       </StyledHead>
-      {open && <Overlay headWidth={headWidth}>{items}</Overlay>}
+      {open && (
+        <Overlay onClick={() => setOpen(false)} headWidth={headWidth}>
+          {items}
+        </Overlay>
+      )}
     </StyledDropdown>
   );
 };

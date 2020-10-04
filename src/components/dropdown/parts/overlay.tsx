@@ -30,12 +30,16 @@ const StyledOverlay = styled.div<{ headWidth?: number }>`
 `;
 
 interface Props {
-  children?: JSX.Element;
+  children?: JSX.Element | JSX.Element[];
   headWidth?: number;
+  onClick?: () => void;
 }
 
-const Overlay = (props: Props) => {
-  const { children, headWidth } = props;
-  return <StyledOverlay headWidth={headWidth}>{children}</StyledOverlay>;
+const Overlay = ({ children, headWidth, onClick }: Props) => {
+  return (
+    <StyledOverlay headWidth={headWidth} onClick={onClick}>
+      {children}
+    </StyledOverlay>
+  );
 };
 export default Overlay;
