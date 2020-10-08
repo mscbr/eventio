@@ -93,6 +93,12 @@
     "no-param-reassign": "off",
     "consistent-return": "off",
     "prefer-const": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "func-names": "off",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/space-before-function-paren": ["off"],
+    "no-useless-catch": "off",
+    "import/no-cycle": "off",
+    "react/jsx-curly-newline": "off"
   }
 }

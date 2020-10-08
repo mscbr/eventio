@@ -1,4 +1,4 @@
-import { IUser } from 'store/user/types';
+import { IUser } from 'store/auth/types';
 
 export interface IEventList {
   id: string;

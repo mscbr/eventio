@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import theme from 'themming';
 import leftPanel from 'assets/layout/login-left-panel.png';
+import { LOGOUT } from 'store/auth/actions';
 import LoginPanel from './parts/loginPanel';
 
 const StyledLayout = styled.div`
@@ -27,7 +29,10 @@ const StyledLayout = styled.div`
 `;
 
 const Login = () => {
-  const [login, setLogin] = useState('');
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(LOGOUT());
+  }, [dispatch]);
   return (
     <StyledLayout>
       <div className="leftPanel">

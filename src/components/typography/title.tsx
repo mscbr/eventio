@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from 'themming';
 
 const StyledTitle = styled.span<{ fontSize?: string }>`
+  display: block;
   font-size: ${({ fontSize }) => fontSize || theme.typography.fontSize[22]};
   font-weight: ${theme.typography.fontWeight.regular};
   color: ${theme.palette.data};
