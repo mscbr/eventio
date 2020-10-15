@@ -1,4 +1,4 @@
-import { EUserActionTypes } from 'store/user/types';
+import { EUserActionTypes } from 'store/auth/types';
 
 export interface ReduxBaseAction {
   type: EUserActionTypes;

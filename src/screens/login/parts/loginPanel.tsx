@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { AppState } from 'store';
-import { login } from 'store/user/actions';
+import { LOGIN } from 'store/auth/actions';
 
 import theme from 'themming';
 import iconShow from 'assets/icons/icon-show.png';
@@ -78,7 +78,8 @@ const CenteredLink = styled(SignupLink)`
 
 const LoginPanel = () => {
   const dispatch = useDispatch();
-  const { user, error, loading } = useSelector(
+  const history = useHistory();
+  const { error, loading } = useSelector(
     (state: AppState) => state.userReducer
   );
   const [showPassword, setShowPassword] = useState(false);
@@ -90,13 +91,9 @@ const LoginPanel = () => {
     email: string;
     password: string;
   }) => {
-    dispatch(login(email, password));
+    dispatch(LOGIN(email, password));
+    history.push('/');
   };
-
-  // this should be moved to genreal preloader
-  if (user) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <PanelWrapper>
@@ -151,7 +148,6 @@ const LoginPanel = () => {
             <div className="btn">
               <CenteredButton size="large" label="sign in" loading={loading} />
             </div>
-            {/* <FormSpy onChange={object => console.log(object)} /> */}
           </form>
         )}
       />

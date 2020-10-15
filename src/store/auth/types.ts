@@ -14,8 +14,17 @@ export interface IUser {
   updatedAt?: string;
 }
 
-export interface IUserState {
-  user: IUser | undefined;
-  loading: boolean;
-  error: object | null; // mock error handling
+export interface IAuthState {
+  user?: IUser | null;
+  loading?: boolean;
+  error?: object | null;
 }
+
+export interface IUsersAction {
+  type: EUserActionTypes;
+  payload: IAuthState;
+}
+
+export type TReducers = {
+  [key: string]: (state: IAuthState, action: IUsersAction) => IAuthState;
+};
