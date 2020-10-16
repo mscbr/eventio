@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { mockEventsList } from 'shared/mockData/events';
-import { IEventList, EFilterTypes } from 'types/event';
+import { IEvent, EFilterTypes } from 'types/event';
 import EventsFilterComponent from './index';
 
 export default { title: 'Atoms/Filter' };
@@ -12,9 +12,9 @@ const StyledWrapper = styled.div`
 `;
 
 export const EventsFilter = () => {
-  const [events, setEvents] = useState<IEventList[]>(mockEventsList);
+  const [events, setEvents] = useState<IEvent[]>(mockEventsList);
 
-  const filterData = (data: IEventList[]) => {
+  const filterData = (data: IEvent[]) => {
     return (filter: EFilterTypes) => {
       switch (filter) {
         case EFilterTypes.future:

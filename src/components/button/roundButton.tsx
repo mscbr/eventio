@@ -2,30 +2,42 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from 'themming';
 import iconAdd from 'assets/icons/icon-add.png';
+import iconConfirm from 'assets/icons/icon-confirm.png';
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ type?: 'add' | 'confirm' }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 56px;
   height: 56px;
   background: ${theme.palette.data};
-  color: ${theme.palette.surface};
+  color: ${({ type }) =>
+    type === 'confirm' ? theme.palette.green : theme.palette.surface};
   border-radius: 50%;
   border: none;
   box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.15);
+  opacity: 0.85;
   &:hover {
     cursor: pointer;
-    background: ${theme.palette.dataHover};
+    background: ${({ type }) =>
+      type === 'confirm' ? theme.palette.greenHover : theme.palette.dataHover};
   }
   transition: 0.3s;
 `;
 
-const RoundButton = (props: { onClick?: () => void }) => {
-  const { onClick } = props;
+interface Props {
+  onClick?: () => void;
+  type?: 'add' | 'confirm';
+}
+
+const RoundButton: React.FC<Props> = ({ onClick, type }) => {
   return (
     <StyledButton onClick={onClick}>
-      <img src={iconAdd} alt="add icon" />
+      {type !== 'confirm' ? (
+        <img src={iconAdd} alt="add icon" />
+      ) : (
+        <img src={iconConfirm} alt="confirm icon" />
+      )}
     </StyledButton>
   );
 };

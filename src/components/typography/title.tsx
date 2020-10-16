@@ -8,6 +8,8 @@ const StyledTitle = styled.span<{ fontSize?: string }>`
   font-weight: ${theme.typography.fontWeight.regular};
   color: ${theme.palette.data};
   line-height: 48px;
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
     font-size: ${({ fontSize }) => fontSize || theme.typography.fontSize[28]};
   }

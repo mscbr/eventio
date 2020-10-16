@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { ViewType, IEventList, EFilterTypes } from 'types/event';
+import { ViewType, IEvent, EFilterTypes } from 'types/event';
 import { mockEventsList } from 'shared/mockData/events';
 import ViewSwitch from 'components/viewSwitch';
 import EventsFilter from 'components/eventsFilter';
@@ -24,9 +24,9 @@ const StyledTop = styled.div`
 
 export const Events = () => {
   const [view, setView] = useState<ViewType>('grid');
-  const [events, setEvents] = useState<IEventList[]>(mockEventsList);
+  const [events, setEvents] = useState<IEvent[]>(mockEventsList);
 
-  const filterData = (data: IEventList[]) => {
+  const filterData = (data: IEvent[]) => {
     return (filter: EFilterTypes) => {
       switch (filter) {
         case EFilterTypes.future:

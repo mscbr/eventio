@@ -1,23 +1,22 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
-import { signIn } from 'api/auth/signIn';
-import { reAuth } from 'api/auth/reAuth';
+import { signIn } from 'api/handlers/signIn';
+import { reAuth } from 'api/handlers/reAuth';
 import { prepareActions } from 'store/helpers';
 import TokenHandler from 'localStorage/tokenHandler';
 import { EUserActionTypes, IAuthState, IUsersAction } from './types';
 
-const actionsData = [
-  [EUserActionTypes.LOGIN_REQUEST, 'loading'],
+const ACTIONS_DATA = [
+  [EUserActionTypes.LOGIN_REQUEST],
   [EUserActionTypes.LOGIN_SUCCESS, 'user'],
   [EUserActionTypes.LOGIN_FAIL, 'error'],
   [EUserActionTypes.LOGOUT],
 ];
-const actions = prepareActions(actionsData);
-export default actions;
+const ACTIONS = prepareActions(ACTIONS_DATA);
+export default ACTIONS;
 
 export const LOGOUT = (): IUsersAction => {
-  TokenHandler.clearToken();
-  TokenHandler.clearRefreshToken();
+  window.localStorage.clear();
   return {
     type: EUserActionTypes.LOGOUT,
     payload: {},
@@ -30,12 +29,12 @@ export const LOGIN = (
 ): ThunkAction<void, IAuthState, undefined, IUsersAction> => async (
   dispatch: ThunkDispatch<{}, {}, IUsersAction>
 ) => {
-  dispatch(actions.LOGIN_REQUEST());
+  // dispatch(ACTIONS[EUserActionTypes.LOGIN_REQUEST]());
   try {
     const response = await signIn(email, password);
-    dispatch(actions.LOGIN_SUCCESS(response));
+    dispatch(ACTIONS[EUserActionTypes.LOGIN_SUCCESS](response));
   } catch (err) {
-    dispatch(actions.LOGIN_FAIL(err));
+    dispatch(ACTIONS[EUserActionTypes.LOGIN_FAIL](err));
   }
 };
 
@@ -45,13 +44,13 @@ export const REFRESH_TOKEN_AUTH = (): ThunkAction<
   undefined,
   IUsersAction
 > => async (dispatch: ThunkDispatch<{}, {}, IUsersAction>) => {
-  dispatch(actions.LOGIN_REQUEST());
+  dispatch(ACTIONS.LOGIN_REQUEST());
   const refreshToken = TokenHandler.getRefreshToken();
-  if (!refreshToken) return dispatch(actions.LOGOUT());
+  if (!refreshToken) return dispatch(ACTIONS.LOGOUT());
   try {
     const response = await reAuth(refreshToken);
-    dispatch(actions.LOGIN_SUCCESS(response));
+    dispatch(ACTIONS.LOGIN_SUCCESS(response));
   } catch (err) {
-    dispatch(actions.LOGIN_FAIL(err));
+    dispatch(ACTIONS.LOGIN_FAIL(err));
   }
 };

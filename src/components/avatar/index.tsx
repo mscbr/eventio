@@ -15,9 +15,7 @@ const StyledButton = styled.div`
   span {
     font-family: ${theme.typography.fontFamily.hind};
     font-size: ${theme.typography.fontSize[14]};
-    margin-top: 3px;
   }
-  transition: 0.3s;
 `;
 
 interface Props {

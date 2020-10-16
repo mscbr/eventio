@@ -12,15 +12,16 @@ const instance = axios.create({
   baseURL: config.apiUrl,
   transformRequest: [
     (data, headers) => {
-      if (
-        TokenHandler.hasToken() &&
-        TokenHandler.hasRefreshToken() &&
-        !Object.keys(data).includes('refreshToken')
-      ) {
-        headers.Authorization = `Token ${TokenHandler.getToken()}`;
-        headers['Refresh-Token'] = `Token ${TokenHandler.getRefreshToken()}`;
+      if (!!data && !Object.keys(data).includes('refreshToken')) {
+        return JSON.stringify(data);
       }
-      return JSON.stringify(data);
+      if (TokenHandler.hasToken() && TokenHandler.hasRefreshToken()) {
+        headers.Authorization = `${TokenHandler.getToken()}`;
+        headers['Refresh-Token'] = `${TokenHandler.getRefreshToken()}`;
+      }
+      if (data) {
+        return JSON.stringify(data);
+      }
     },
   ],
 });
