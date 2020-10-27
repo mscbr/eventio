@@ -1,15 +1,20 @@
-import { pxToRem, formatDate, toDeepString, deepCompareObj } from './helpers';
+import {
+  pxToRem,
+  formatDateFromISO,
+  toDeepString,
+  deepCompareObj,
+} from './helpers';
 
 test('pxToRem', () => {
   expect(pxToRem(12)).toBe('0.75rem');
   expect(pxToRem(18)).toBe('1.125rem');
 });
 
-test('formatDate', () => {
-  expect(formatDate('2020-02-18T13:34:49.267Z')).toBe(
+test('formatDateFromISO', () => {
+  expect(formatDateFromISO('2020-02-18T13:34:49.267Z')).toBe(
     'February 18, 2020 - 2:34 PM'
   );
-  expect(formatDate('2020-04-08T05:36:44.905Z')).toBe(
+  expect(formatDateFromISO('2020-04-08T05:36:44.905Z')).toBe(
     'April 8, 2020 - 7:36 AM'
   );
 });

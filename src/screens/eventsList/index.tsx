@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { AppState } from 'store';
@@ -46,6 +47,7 @@ const StyledTop = styled.div`
 const EventsList = () => {
   const upMobile = useWindowWidth() > theme.breakpoints.mobile;
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { events: eventsData, isFetching } = useSelector(
     (state: AppState) => state.eventsReducer
@@ -108,7 +110,12 @@ const EventsList = () => {
   }, [eventsData]);
 
   return (
-    <ScreenLayout header={header} bottomButton={<RoundButton />}>
+    <ScreenLayout
+      header={header}
+      bottomButton={
+        <RoundButton onClick={() => history.push('/event/create')} />
+      }
+    >
       <StyledEventsContainer>
         <StyledTop>
           <EventsFilter onChange={filterData(eventsData)} />

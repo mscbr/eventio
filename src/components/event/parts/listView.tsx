@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { formatDate, deepCompareObj } from 'shared/helpers';
+import { formatDateFromISO, deepCompareObj } from 'shared/helpers';
 import theme from 'themming';
 import useWindowWidth from 'shared/hooks/useWindowWidth';
 import { setButton, isExpired } from 'components/event/helpers';
@@ -90,7 +90,7 @@ const ListView = ({
           </StyledDescription>
           <StyledFooter>
             <div>
-              <Detail>{formatDate(startsAt)}</Detail>
+              <Detail>{formatDateFromISO(startsAt)}</Detail>
               <Capacity capacity={capacity} atendees={attendees.length} />
             </div>
             <Button
@@ -122,7 +122,7 @@ const ListView = ({
           </Cell>
           <Cell width="138px" margin="0 40px 0 0">
             <StyledOverflow color={theme.palette.detail}>
-              <Detail>{formatDate(startsAt)}</Detail>
+              <Detail>{formatDateFromISO(startsAt)}</Detail>
             </StyledOverflow>
           </Cell>
           <Cell width="102px" margin="0 40px 0 0">

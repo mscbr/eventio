@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { formatDate, deepCompareObj } from 'shared/helpers';
+import { formatDateFromISO, deepCompareObj } from 'shared/helpers';
 import theme from 'themming';
 import { setButton, isExpired } from 'components/event/helpers';
 import Detail from 'components/typography/detail';
@@ -71,7 +71,7 @@ const GridView = ({
 
   return (
     <StyledGridView>
-      <Detail>{formatDate(startsAt)}</Detail>
+      <Detail>{formatDateFromISO(startsAt)}</Detail>
       <StyledTitle>
         <Title>{title}</Title>
       </StyledTitle>

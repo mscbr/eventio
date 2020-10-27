@@ -60,6 +60,20 @@ const StyledTextInput = styled.div<{
     }
     margin-bottom: 8px;
   }
+
+  input[type='date'] {
+    color: ${({ value }) => (value ? 'initial' : 'transparent')};
+  }
+  input[type='date']:focus {
+    color: initial;
+  }
+  input[type='time'] {
+    color: ${({ value }) => (value ? 'initial' : 'transparent')};
+  }
+  input[type='time']:focus {
+    color: initial;
+  }
+
   .inputIcon {
     position: absolute;
     width: 24px;
@@ -92,6 +106,7 @@ interface Props {
   icon?: JSX.Element;
   className?: string;
   name?: string;
+  min?: string;
 }
 
 const TextInput = (props: Props) => {
@@ -106,6 +121,7 @@ const TextInput = (props: Props) => {
     type,
     icon,
     className,
+    min,
   } = props;
   const [active, setActive] = useState(false);
   return (
@@ -122,6 +138,7 @@ const TextInput = (props: Props) => {
           value={value}
           onChange={e => onChange(e.target.value)}
           type={type || 'text'}
+          min={min || '0'}
           onFocus={() => setActive(true)}
           onBlur={e => {
             setActive(false);
