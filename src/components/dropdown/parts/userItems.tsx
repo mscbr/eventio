@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import theme from 'themming';
+import { LOGOUT } from 'store/auth/actions';
 
 const StyledUl = styled.ul`
   padding: 0;
@@ -22,16 +25,27 @@ const StyledUl = styled.ul`
 `;
 
 const UserItems = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ): void => {
+    e.preventDefault();
+    dispatch(LOGOUT());
+  };
+
   return (
     <StyledUl>
       <li>
-        <Link to="/#">Profile</Link>
+        <Link to="/">Profile</Link>
       </li>
       <li>
-        <Link to="/login">Log Out</Link>
+        <Link to="/login" onClick={handleLogout}>
+          Log Out
+        </Link>
       </li>
     </StyledUl>
   );
 };
 
-export default UserItems;
+export default React.memo(UserItems);

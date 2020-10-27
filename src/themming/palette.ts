@@ -1,4 +1,5 @@
 const palette = {
+  background: '#F2F2F2',
   surface: '#FFFFFF',
   data: '#323C46',
   dataHover: '#565D5A',

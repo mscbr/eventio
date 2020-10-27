@@ -1,6 +1,6 @@
-import { IUser } from 'store/auth/types';
+import { IUser } from 'types/user';
 
-export interface IEventList {
+export interface IEvent {
   id: string;
   title: string;
   description: string;

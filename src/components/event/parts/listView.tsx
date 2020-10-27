@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { formatDate, deepCompareObj } from 'shared/helpers';
 import theme from 'themming';
 import useWindowWidth from 'shared/hooks/useWindowWidth';
-import { setButton } from 'components/event/helpers';
+import { setButton, isExpired } from 'components/event/helpers';
 import Detail from 'components/typography/detail';
 import Title from 'components/typography/title';
 import Description from 'components/typography/description';
 import Capacity from 'components/event/parts/capacity';
 import Button from 'components/button';
-import { IEventList } from 'types/event';
+import { IEvent } from 'types/event';
 import { AppState } from 'store/index';
 import Cell from './cell';
 
@@ -50,15 +50,16 @@ const StyledFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: auto auto 0;
+  margin: 16px auto 0 auto;
 `;
 
 interface Props {
-  event: IEventList;
+  event: IEvent;
 }
 
 const ListView = ({
   event: {
+    id: eventId,
     startsAt,
     title,
     capacity,
@@ -69,11 +70,15 @@ const ListView = ({
 }: Props) => {
   const id = useSelector((state: AppState) => state.userReducer.user?.id);
   const upMobile = useWindowWidth() > theme.breakpoints.mobile;
-  const [btnLabel, btnColor] = setButton(
+  const [btnLabel, btnColor, handleClick] = setButton(
     id || '',
     ownerId,
     attendees.map(user => user.id)
   );
+
+  const handleEventAction = useCallback(() => {
+    handleClick(eventId);
+  }, [handleClick, eventId]);
 
   return (
     <>
@@ -88,7 +93,12 @@ const ListView = ({
               <Detail>{formatDate(startsAt)}</Detail>
               <Capacity capacity={capacity} atendees={attendees.length} />
             </div>
-            <Button label={btnLabel} color={btnColor} />
+            <Button
+              label={btnLabel}
+              color={btnColor}
+              onClick={handleEventAction}
+              disabled={isExpired(startsAt)}
+            />
           </StyledFooter>
         </StyledListView>
       ) : (
@@ -119,7 +129,12 @@ const ListView = ({
             <Capacity capacity={capacity} atendees={attendees.length} />
           </Cell>
           <Cell>
-            <Button label={btnLabel} color={btnColor} />
+            <Button
+              label={btnLabel}
+              color={btnColor}
+              onClick={handleEventAction}
+              disabled={isExpired(startsAt)}
+            />
           </Cell>
         </StyledListView>
       )}
