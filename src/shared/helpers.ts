@@ -4,7 +4,7 @@ export const pxToRem = (value: number): string => {
   return `${value / 16}rem`;
 };
 
-export const formatDate = (date: string): string => {
+export const formatDateFromISO = (date: string): string => {
   const engDate = DateTime.fromISO(date).setLocale('en');
   return `${engDate.toLocaleString(
     DateTime.DATE_FULL

@@ -16,6 +16,9 @@ import Subtitle from 'components/typography/subtitle';
 import { validateAll, isRequired, isEmail } from 'shared/validators';
 import SignupLink from './signupLink';
 
+// ".class" version of working with styled-components
+// might be more lightweight as using less declarations
+// check .class style assignment computation cost
 const PanelWrapper = styled.div`
   padding: 24px;
   display: flex;

@@ -3,9 +3,7 @@ import { createBrowserHistory } from 'history';
 import { store } from 'store';
 import { unattendEvent } from 'api/handlers/unattendEvent';
 import { attendEvent } from 'api/handlers/attendEvent';
-import ACTIONS, { REFETCH_EVENTS } from 'store/events/actions';
-
-const { SET_ATTEND_LOADING } = ACTIONS;
+import { REFETCH_EVENTS } from 'store/events/actions';
 
 export const setButton = (
   loggedUser: string,

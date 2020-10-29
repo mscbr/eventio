@@ -12,7 +12,7 @@ const instance = axios.create({
   baseURL: config.apiUrl,
   transformRequest: [
     (data, headers) => {
-      if (!!data && !Object.keys(data).includes('refreshToken')) {
+      if (!!data && Object.keys(data).includes('refreshToken')) {
         return JSON.stringify(data);
       }
       if (TokenHandler.hasToken() && TokenHandler.hasRefreshToken()) {
@@ -45,6 +45,7 @@ instance.interceptors.response.use(
       case 'User.NotAuthenticated':
         store.dispatch(REFRESH_TOKEN_AUTH());
         return;
+      // write the case for error/response status handling
       default:
         return Promise.reject(error);
     }

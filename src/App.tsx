@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store';
 import Login from 'screens/login';
 import EventsList from 'screens/eventsList';
+import CreateEvent from 'screens/createEvent';
 import Centered from 'components/centered';
 import Spinner from 'components/spinner';
 import AuthRoute from 'components/authRoute';
@@ -30,6 +31,7 @@ const App = () => {
           path="/event/:id/edit"
           component={() => <span>EDIT EVENT</span>}
         />
+        <AuthRoute exact path="/event/create" component={CreateEvent} />
       </Switch>
     </>
   );
