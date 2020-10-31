@@ -18,6 +18,8 @@ export const RegularButton = () => {
     <Wrapper>
       <Button size="large" label="sign in" />
       <br />
+      <Button size="large" label="Refresh" color="error" />
+      <br />
       <Button size="large" label="sign in" loading />
       <br />
       <Button label="Join" />

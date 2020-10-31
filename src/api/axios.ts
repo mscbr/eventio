@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from 'config';
 import { store } from 'store';
 import { REFRESH_TOKEN_AUTH, LOGOUT } from 'store/auth/actions';
+import SERVER_ACTIONS from 'store/serverError/actions';
 import TokenHandler from 'localStorage/tokenHandler';
 
 const instance = axios.create({
@@ -47,6 +48,13 @@ instance.interceptors.response.use(
         return;
       // write the case for error/response status handling
       default:
+        store.dispatch(
+          SERVER_ACTIONS.SET_SERVER_ERROR(
+            true,
+            error.response.status,
+            error.response.statusText
+          )
+        );
         return Promise.reject(error);
     }
   }

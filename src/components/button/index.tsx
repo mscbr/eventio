@@ -21,6 +21,9 @@ const StyledButton = styled.button<{
     if (color === 'secondary') {
       return `${theme.palette.pink}`;
     }
+    if (color === 'error') {
+      return `${theme.palette.underlineActive}`;
+    }
     return `${theme.palette.green}`;
   }};
   color: ${({ color }) =>
@@ -47,6 +50,9 @@ const StyledButton = styled.button<{
       }
       if (color === 'edit') {
         return `${theme.palette.editButton.hover}`;
+      }
+      if (color === 'error') {
+        return `${theme.palette.underlineActive}`;
       }
       return `${theme.palette.greenHover}`;
     }};
