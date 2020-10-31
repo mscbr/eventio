@@ -14,7 +14,6 @@ const StyledButton = styled.div`
   .x1 {
     height: 25px;
     width: 2px;
-
     margin-left: 12px;
     background-color: black;
     transform: rotate(45deg);

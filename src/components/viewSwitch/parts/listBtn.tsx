@@ -15,11 +15,15 @@ const StyledListBtn = styled.div`
   }
 `;
 
-const ListBtn = (props: { active?: boolean; onClick?: () => void }) => {
-  const { active, onClick } = props;
+interface Props {
+  active?: boolean;
+  onClick?: () => void;
+}
+
+const ListBtn = ({ active, onClick }: Props) => {
   return (
     <StyledListBtn onClick={onClick}>
-      <img src={active ? iconListFilled : iconList} alt="list icon" />
+      <img src={active ? iconListFilled : iconList} alt="List icon" />
     </StyledListBtn>
   );
 };

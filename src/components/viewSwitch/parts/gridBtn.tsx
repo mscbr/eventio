@@ -15,11 +15,15 @@ const StyledGridBtn = styled.div`
   }
 `;
 
-const GridBtn = (props: { active?: boolean; onClick?: () => void }) => {
-  const { active, onClick } = props;
+interface Props {
+  active?: boolean;
+  onClick?: () => void;
+}
+
+const GridBtn = ({ active, onClick }: Props) => {
   return (
     <StyledGridBtn onClick={onClick}>
-      <img src={active ? iconGridFilled : iconGrid} alt="grid icon" />
+      <img src={active ? iconGridFilled : iconGrid} alt="Grid icon" />
     </StyledGridBtn>
   );
 };

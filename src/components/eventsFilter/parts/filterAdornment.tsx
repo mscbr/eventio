@@ -10,8 +10,8 @@ const StyledSpan = styled.span`
   letter-spacing: 0.7px;
 `;
 
-const FilterAdornment = (props: { children?: string }) => {
-  return <StyledSpan>{props.children}</StyledSpan>;
+const FilterAdornment: React.FC = ({ children }) => {
+  return <StyledSpan>{children}</StyledSpan>;
 };
 
 export default FilterAdornment;

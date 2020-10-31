@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface CenteredProps {
-  children?: React.ReactNode;
-}
-
 const StyledCenter = styled.div`
   position: absolute;
   top: 0;
@@ -19,10 +15,10 @@ const StyledCenter = styled.div`
   }
 `;
 
-const Centered: React.FC<CenteredProps> = props => {
+const Centered: React.FC = ({ children }) => {
   return (
     <StyledCenter>
-      <div className="centered">{props.children}</div>
+      <div className="centered">{children}</div>
     </StyledCenter>
   );
 };

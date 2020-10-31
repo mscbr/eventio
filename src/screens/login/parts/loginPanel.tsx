@@ -16,9 +16,6 @@ import Subtitle from 'components/typography/subtitle';
 import { validateAll, isRequired, isEmail } from 'shared/validators';
 import SignupLink from './signupLink';
 
-// ".class" version of working with styled-components
-// might be more lightweight as using less declarations
-// check .class style assignment computation cost
 const PanelWrapper = styled.div`
   padding: 24px;
   display: flex;
@@ -95,7 +92,7 @@ const LoginPanel = () => {
     password: string;
   }) => {
     dispatch(LOGIN(email, password));
-    history.push('/');
+    history.push('/events/');
   };
 
   return (
@@ -139,7 +136,7 @@ const LoginPanel = () => {
                     type={showPassword ? 'text' : 'password'}
                     icon={
                       <div onClick={() => setShowPassword(state => !state)}>
-                        <img src={iconShow} alt="icon-show" />
+                        <img src={iconShow} alt="Show password icon" />
                       </div>
                     }
                     className="password"

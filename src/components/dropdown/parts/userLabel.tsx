@@ -9,8 +9,8 @@ const StyledSpan = styled.span`
   letter-spacing: 0.7px;
 `;
 
-const UserLabel = (props: { children?: string }) => {
-  return <StyledSpan>{props.children}</StyledSpan>;
+const UserLabel: React.FC = ({ children }) => {
+  return <StyledSpan>{children}</StyledSpan>;
 };
 
 export default UserLabel;

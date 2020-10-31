@@ -51,7 +51,6 @@ const CreateEvent = () => {
     undefined
   );
 
-  // little bit not DRY
   const surfaceSize = () => {
     if (upMobile)
       return {
@@ -84,7 +83,7 @@ const CreateEvent = () => {
         capacity,
       });
       setPosting(false);
-      history.push('/');
+      history.push('/events/all');
     } catch (err) {
       setPosting(false);
       setPostingError(err);
@@ -94,7 +93,10 @@ const CreateEvent = () => {
   return (
     <ScreenLayout
       header={[
-        <CloseButton onClick={() => history.push('/')} key="close-btn" />,
+        <CloseButton
+          onClick={() => history.push('/events/all')}
+          key="close-btn"
+        />,
       ]}
     >
       <Surface {...surfaceSize()}>
@@ -183,7 +185,7 @@ const CreateEvent = () => {
                       onBlur={input.onBlur}
                       type="number"
                       className="input"
-                      min="0"
+                      min="1"
                     />
                   )}
                 </Field>

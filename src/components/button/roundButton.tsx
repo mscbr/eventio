@@ -34,9 +34,9 @@ const RoundButton: React.FC<Props> = ({ onClick, type }) => {
   return (
     <StyledButton onClick={onClick}>
       {type !== 'confirm' ? (
-        <img src={iconAdd} alt="add icon" />
+        <img src={iconAdd} alt="Add icon" />
       ) : (
-        <img src={iconConfirm} alt="confirm icon" />
+        <img src={iconConfirm} alt="Confirm icon" />
       )}
     </StyledButton>
   );

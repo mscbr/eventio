@@ -10,7 +10,7 @@ const StyledDropdown = styled.div`
   position: relative;
 `;
 
-const StyledHead = styled.div<{ dark?: boolean }>`
+const StyledHead = styled.div<{ darkArrow?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -23,18 +23,18 @@ const StyledHead = styled.div<{ dark?: boolean }>`
   }
   .arrow {
     margin-left: 8px;
-    margin-top: ${props => (props.dark ? '-5px' : 'initial')};
+    margin-top: ${({ darkArrow }) => (darkArrow ? '-5px' : 'initial')};
   }
 `;
 
 interface Props {
   label?: JSX.Element;
   items?: JSX.Element;
-  dark?: boolean;
+  darkArrow?: boolean;
   adornment?: JSX.Element;
 }
 
-const Dropdown = ({ label, items, dark, adornment }: Props) => {
+const Dropdown = ({ label, items, darkArrow, adornment }: Props) => {
   const [open, setOpen] = useState(false);
   const [headWidth, setHeadWidth] = useState<number>();
   const headRef = useRef<HTMLDivElement>(null);
@@ -57,11 +57,15 @@ const Dropdown = ({ label, items, dark, adornment }: Props) => {
 
   return (
     <StyledDropdown ref={dropdownRef}>
-      <StyledHead onClick={() => setOpen(state => !state)} ref={headRef} dark>
+      <StyledHead
+        onClick={() => setOpen(state => !state)}
+        ref={headRef}
+        darkArrow
+      >
         {adornment && <div>{adornment}</div>}
         <div className="label">{label}</div>
         <div className="arrow">
-          <img src={dark ? iconArrowDark : iconArrow} alt="arrow icon" />
+          <img src={darkArrow ? iconArrowDark : iconArrow} alt="arrow icon" />
         </div>
       </StyledHead>
       {open && (

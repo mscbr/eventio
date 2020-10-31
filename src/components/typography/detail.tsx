@@ -8,8 +8,8 @@ const StyledDetail = styled.span<{ color?: string }>`
   color: ${({ color }) => color || theme.palette.detail};
 `;
 
-const Detail = (props: { children?: string; color?: string }) => {
-  return <StyledDetail color={props.color}>{props.children}</StyledDetail>;
+const Detail: React.FC<{ color?: string }> = ({ children, color }) => {
+  return <StyledDetail color={color}>{children}</StyledDetail>;
 };
 
 export default Detail;

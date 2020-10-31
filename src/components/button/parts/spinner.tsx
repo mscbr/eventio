@@ -19,7 +19,7 @@ const StyledSpinner = styled.div`
 const Spinner = () => {
   return (
     <StyledSpinner>
-      <img src={loadSpin} alt="loading spinner" />
+      <img src={loadSpin} alt="Loading spinner" />
     </StyledSpinner>
   );
 };

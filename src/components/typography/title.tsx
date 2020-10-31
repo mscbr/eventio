@@ -15,8 +15,8 @@ const StyledTitle = styled.span<{ fontSize?: string }>`
   }
 `;
 
-const Title = (props: { children?: string; fontSize?: string }) => {
-  return <StyledTitle fontSize={props.fontSize}>{props.children}</StyledTitle>;
+const Title: React.FC<{ fontSize?: string }> = ({ children, fontSize }) => {
+  return <StyledTitle fontSize={fontSize}>{children}</StyledTitle>;
 };
 
 export default Title;

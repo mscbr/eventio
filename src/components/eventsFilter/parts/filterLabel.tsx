@@ -10,8 +10,8 @@ const StyledSpan = styled.span`
   letter-spacing: 0.7px;
 `;
 
-const FilterLabel = (props: { children?: string }) => {
-  return <StyledSpan>{props.children}</StyledSpan>;
+const FilterLabel: React.FC = ({ children }) => {
+  return <StyledSpan>{children}</StyledSpan>;
 };
 
 export default FilterLabel;

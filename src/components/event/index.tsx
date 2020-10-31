@@ -15,8 +15,6 @@ interface Props {
 const Event = ({ viewType, event }: Props) => {
   const upMobile = useWindowWidth() > theme.breakpoints.mobile;
 
-  // optimization hint: check if those values can be
-  // computed once and passed
   const surfaceSize = () => {
     if (upMobile)
       return {

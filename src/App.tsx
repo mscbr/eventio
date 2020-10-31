@@ -9,9 +9,14 @@ import CreateEvent from 'screens/createEvent';
 import Centered from 'components/centered';
 import Spinner from 'components/spinner';
 import AuthRoute from 'components/authRoute';
+import ErrorScreen from 'screens/error/fourFour';
+import ServerErrorScreen from 'screens/error/server';
 
 const App = () => {
   const { loading, user } = useSelector((state: AppState) => state.userReducer);
+  const { isError, status, statusText } = useSelector(
+    (state: AppState) => state.serverErrorReducer
+  );
 
   if (loading) {
     return (
@@ -20,18 +25,25 @@ const App = () => {
       </Centered>
     );
   }
+  if (isError) {
+    return <ServerErrorScreen status={status} statusText={statusText} />;
+  }
 
   return (
     <>
       <Switch>
-        <Route path="/login">{!user ? <Login /> : <Redirect to="/" />}</Route>
-        <AuthRoute exact path="/" component={EventsList} />
+        <Route path="/login">
+          {!user ? <Login /> : <Redirect to="/events" />}
+        </Route>
+        <AuthRoute exact path="/events/:eventsFilter?" component={EventsList} />
         <AuthRoute
           exact
           path="/event/:id/edit"
           component={() => <span>EDIT EVENT</span>}
         />
         <AuthRoute exact path="/event/create" component={CreateEvent} />
+        <AuthRoute exact path="/" component={() => <Redirect to="/events" />} />
+        <Route component={ErrorScreen} />
       </Switch>
     </>
   );

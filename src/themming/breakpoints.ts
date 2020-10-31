@@ -1,5 +1,5 @@
 const breakpoints = {
-  mobile: 600,
+  mobile: 941, // arbitral value
 };
 
 export default breakpoints;

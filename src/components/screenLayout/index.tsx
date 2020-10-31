@@ -34,7 +34,7 @@ const ScreenLayout: React.FC<Props> = ({ children, header, bottomButton }) => {
   return (
     <StyledScreenLayout>
       <StyledHeader>
-        {[<StyledLogo src={logo} alt="logo" key="logo" />, ...(header || [''])]}
+        {[<StyledLogo src={logo} alt="Logo" key="logo" />, ...(header || [''])]}
       </StyledHeader>
       {children}
       <StyledBottom>{bottomButton}</StyledBottom>

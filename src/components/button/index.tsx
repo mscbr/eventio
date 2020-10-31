@@ -14,12 +14,16 @@ const StyledButton = styled.button<{
   align-items: center;
   width: ${({ size }) => (size === 'large' ? '240px' : '100px')};
   height: ${({ size }) => (size === 'large' ? '57px' : '32px')};
-  background: ${({ color, disabled }) => {
-    if (color === 'edit' || disabled) {
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 'initial')};
+  background: ${({ color }) => {
+    if (color === 'edit') {
       return `${theme.palette.editButton.surface}`;
     }
     if (color === 'secondary') {
       return `${theme.palette.pink}`;
+    }
+    if (color === 'error') {
+      return `${theme.palette.underlineActive}`;
     }
     return `${theme.palette.green}`;
   }};
@@ -40,13 +44,16 @@ const StyledButton = styled.button<{
     cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
     background: ${({ color, disabled }) => {
       if (disabled) {
-        return `${theme.palette.editButton.surface}`;
+        return;
       }
       if (color === 'secondary') {
         return `${theme.palette.pinkHover}`;
       }
       if (color === 'edit') {
         return `${theme.palette.editButton.hover}`;
+      }
+      if (color === 'error') {
+        return `${theme.palette.underlineActive}`;
       }
       return `${theme.palette.greenHover}`;
     }};
@@ -57,7 +64,7 @@ const StyledButton = styled.button<{
 interface Props {
   color?: string;
   size?: string;
-  label?: string;
+  label: string;
   onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;

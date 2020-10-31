@@ -78,6 +78,8 @@ const EventsList = () => {
         />
       ),
     ],
+    // user is not included in dependencies because user
+    // cannot be changed without re-rendering the screen (auth flow)
     [upMobile, loading]
   );
 

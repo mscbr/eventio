@@ -29,7 +29,7 @@ export const LOGIN = (
 ): ThunkAction<void, IAuthState, undefined, IUsersAction> => async (
   dispatch: ThunkDispatch<{}, {}, IUsersAction>
 ) => {
-  // dispatch(ACTIONS[EUserActionTypes.LOGIN_REQUEST]());
+  dispatch(ACTIONS[EUserActionTypes.LOGIN_REQUEST]());
   try {
     const response = await signIn(email, password);
     dispatch(ACTIONS[EUserActionTypes.LOGIN_SUCCESS](response));

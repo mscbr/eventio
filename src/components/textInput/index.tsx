@@ -16,21 +16,21 @@ const StyledTextInput = styled.div<{
   }
   label {
     position: absolute;
-    bottom: ${props => (!props.active && !props.value ? 'initial' : '42px')};
-    font-size: ${props =>
-      !props.active && !props.value
+    bottom: ${({ active, value }) => (!active && !value ? 'initial' : '42px')};
+    font-size: ${({ active, value }) =>
+      !active && !value
         ? `${theme.typography.fontSize[16]}`
         : `${theme.typography.fontSize[14]}`};
     font-weight: ${theme.typography.fontWeight.light};
     letter-spacing: ${theme.typography.letterSpacing[1]};
-    color: ${props =>
-      !props.active && !props.value
+    color: ${({ active, value }) =>
+      !active && !value
         ? `${theme.palette.label}`
         : `${theme.palette.labelActive}`};
     transition: font-size 0.2s;
     @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
-      font-size: ${props =>
-        !props.active && !props.value
+      font-size: ${({ active, value }) =>
+        !active && !value
           ? `${theme.typography.fontSize[18]}`
           : `${theme.typography.fontSize[14]}`};
     }
@@ -45,11 +45,11 @@ const StyledTextInput = styled.div<{
     border: none;
     outline: none;
     border-bottom: 1px solid;
-    border-bottom-color: ${props => {
-      if (props.error) {
+    border-bottom-color: ${({ error, active }) => {
+      if (error) {
         return `${theme.palette.pink}`;
       }
-      if (props.active) {
+      if (active) {
         return `${theme.palette.underlineActive}`;
       }
       return `${theme.palette.underline}`;
@@ -109,20 +109,19 @@ interface Props {
   min?: string;
 }
 
-const TextInput = (props: Props) => {
-  const {
-    id,
-    label,
-    value,
-    onChange,
-    onBlur,
-    error,
-    helperText,
-    type,
-    icon,
-    className,
-    min,
-  } = props;
+const TextInput = ({
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  error,
+  helperText,
+  type,
+  icon,
+  className,
+  min,
+}: Props) => {
   const [active, setActive] = useState(false);
   return (
     <StyledTextInput

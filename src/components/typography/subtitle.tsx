@@ -11,8 +11,8 @@ const StyledSubtitle = styled.span`
   }
 `;
 
-const Subtitle = (props: { children?: string }) => {
-  return <StyledSubtitle>{props.children}</StyledSubtitle>;
+const Subtitle: React.FC = ({ children }) => {
+  return <StyledSubtitle>{children}</StyledSubtitle>;
 };
 
 export default Subtitle;

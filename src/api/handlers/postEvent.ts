@@ -11,8 +11,8 @@ interface Payload {
 export const postEvent = async (params: Payload) => {
   const url = endpoints.events;
   try {
-    const response = await axiosEventio.post(url, { ...params });
-    return response;
+    const { data } = await axiosEventio.post(url, { ...params });
+    return data;
   } catch (error) {
     throw error;
   }

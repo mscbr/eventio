@@ -36,7 +36,7 @@ const Login = () => {
   return (
     <StyledLayout>
       <div className="leftPanel">
-        <img src={leftPanel} alt="login left panel" />
+        <img src={leftPanel} alt="Left panel of login page" />
       </div>
       <div className="loginPanel">
         <LoginPanel />

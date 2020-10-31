@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import theme from 'themming';
@@ -49,27 +50,44 @@ interface Props {
 }
 
 const EventsFilter = ({ onChange }: Props) => {
-  const upMobile = useWindowWidth() > theme.breakpoints.mobile;
-
+  const history = useHistory();
+  const { eventsFilter } = useParams();
+  // @ts-ignore
+  const filter: keyof typeof EFilterTypes = Object.keys(EFilterTypes).includes(
+    eventsFilter || ''
+  )
+    ? eventsFilter
+    : 'all';
   const [activeFilter, setActiveFilter] = useState<EFilterTypes>(
-    EFilterTypes.all
+    EFilterTypes[filter]
   );
+  const upMobile = useWindowWidth() > theme.breakpoints.mobile;
 
   const onClick = (filterType: EFilterTypes) => {
     setActiveFilter(filterType);
     onChange(filterType);
+
+    if (filterType === EFilterTypes.all) {
+      history.push('/events/all');
+    }
+    if (filterType === EFilterTypes.future) {
+      history.push('/events/future');
+    }
+    if (filterType === EFilterTypes.past) {
+      history.push('/events/past');
+    }
   };
 
   const dropDownItems = () => {
     return (
       <StyledUl>
-        {Object.values(EFilterTypes).map(filter => (
-          <li key={filter}>
+        {Object.values(EFilterTypes).map(filterType => (
+          <li key={filterType}>
             <StyledFilter
-              active={filter === activeFilter}
-              onClick={() => onClick(filter)}
+              active={filterType === activeFilter}
+              onClick={() => onClick(filterType)}
             >
-              {filter.toUpperCase()} <br />
+              {filterType.toUpperCase()} <br />
             </StyledFilter>
           </li>
         ))}
@@ -81,13 +99,13 @@ const EventsFilter = ({ onChange }: Props) => {
     <>
       {upMobile ? (
         <StyledContainer>
-          {Object.values(EFilterTypes).map(filter => (
+          {Object.values(EFilterTypes).map(filterType => (
             <StyledFilter
-              key={filter}
-              active={filter === activeFilter}
-              onClick={() => onClick(filter)}
+              key={filterType}
+              active={filterType === activeFilter}
+              onClick={() => onClick(filterType)}
             >
-              {filter.toUpperCase()}
+              {filterType.toUpperCase()}
             </StyledFilter>
           ))}
         </StyledContainer>
@@ -96,7 +114,7 @@ const EventsFilter = ({ onChange }: Props) => {
           label={<FilterLabel>{activeFilter.toUpperCase()}</FilterLabel>}
           adornment={<FilterAdornment>SHOW: </FilterAdornment>}
           items={dropDownItems()}
-          dark
+          darkArrow
         />
       )}
     </>

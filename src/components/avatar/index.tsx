@@ -23,8 +23,7 @@ interface Props {
   lastName?: string;
 }
 
-const Avatar = (props: Props) => {
-  const { firstName, lastName } = props;
+const Avatar = ({ firstName, lastName }: Props) => {
   const initials = `${firstName && firstName[0]}${lastName && lastName[0]}`;
   return (
     <StyledButton>

@@ -44,7 +44,7 @@ export const BasicTextInput = () => {
         type={showPassword ? 'text' : 'password'}
         icon={
           <div onClick={() => setShowPassword(state => !state)}>
-            <img src={iconShow} alt="icon-show" />
+            <img src={iconShow} alt="Show password icon" />
           </div>
         }
       />

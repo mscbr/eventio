@@ -9,7 +9,6 @@ export const setButton = (
   loggedUser: string,
   owner: string,
   attendeesId: string[]
-  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 ): [string, string, (id: string) => void] => {
   if (attendeesId.includes(loggedUser)) {
     const handleClick = async (eventId: string) => {

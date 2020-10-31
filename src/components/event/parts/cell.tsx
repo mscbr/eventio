@@ -16,7 +16,6 @@ const StyledCell = styled.div<Props>`
 interface Props {
   width?: string;
   margin?: string;
-  children?: React.ReactNode;
 }
 
 const Cell: React.FC<Props> = ({ width, margin, children }) => {

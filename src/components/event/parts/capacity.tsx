@@ -32,7 +32,7 @@ interface Props {
 const Capacity = ({ atendees, capacity, icon }: Props) => {
   return (
     <StyledCapacity>
-      {icon && <StyledIcon src={iconUser} alt="user icon" />}
+      {icon && <StyledIcon src={iconUser} alt="User icon" />}
       <StyledCounter>
         {atendees} of {capacity}
       </StyledCounter>

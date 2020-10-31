@@ -25,11 +25,14 @@ const StyledButton = styled.button`
   transition: 0.3s;
 `;
 
-const DeleteButton = (props: { onClick?: () => void }) => {
-  const { onClick } = props;
+interface Props {
+  onClick?: () => void;
+}
+
+const DeleteButton = ({ onClick }: Props) => {
   return (
     <StyledButton onClick={onClick}>
-      <img src={iconDelete} alt="delete icon" />
+      <img src={iconDelete} alt="Delete icon" />
       <span>DELETE EVENT</span>
     </StyledButton>
   );

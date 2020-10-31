@@ -8,8 +8,8 @@ const StyledDescription = styled.span`
   color: ${theme.palette.dropdown};
 `;
 
-const Description = (props: { children?: string }) => {
-  return <StyledDescription>{props.children}</StyledDescription>;
+const Description: React.FC = ({ children }) => {
+  return <StyledDescription>{children}</StyledDescription>;
 };
 
 export default Description;
