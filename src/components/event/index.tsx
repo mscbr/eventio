@@ -10,9 +10,10 @@ import ListView from './parts/listView';
 interface Props {
   event: IEvent;
   viewType?: ViewType;
+  onClick?: () => void;
 }
 
-const Event = ({ viewType, event }: Props) => {
+const Event = ({ viewType, event, onClick }: Props) => {
   const upMobile = useWindowWidth() > theme.breakpoints.mobile;
 
   const surfaceSize = () => {
@@ -31,8 +32,8 @@ const Event = ({ viewType, event }: Props) => {
   };
   return (
     <Surface {...surfaceSize()}>
-      {viewType !== 'list' && <GridView event={event} />}
-      {viewType === 'list' && <ListView event={event} />}
+      {viewType !== 'list' && <GridView event={event} onClick={onClick} />}
+      {viewType === 'list' && <ListView event={event} onClick={onClick} />}
     </Surface>
   );
 };

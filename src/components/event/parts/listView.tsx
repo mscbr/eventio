@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { formatDateFromISO, deepCompareObj } from 'shared/helpers';
@@ -33,6 +34,13 @@ const StyledOverflow = styled.div<{ color?: string }>`
   text-overflow: ellipsis;
   color: ${({ color }) => color || 'inherit'};
 `;
+const StyledLink = styled.div<{ titleLink: boolean }>`
+  cursor: ${({ titleLink }) => (titleLink ? 'pointer' : 'initial')};
+  &:hover {
+    opacity: ${({ titleLink }) => (titleLink ? 0.8 : 1)};
+  }
+  transition: 0.3s;
+`;
 const StyledDescription = styled.div`
   margin-top: -8px;
   text-align: justify;
@@ -55,6 +63,7 @@ const StyledFooter = styled.div`
 
 interface Props {
   event: IEvent;
+  onClick?: () => void;
 }
 
 const ListView = ({
@@ -67,8 +76,15 @@ const ListView = ({
     owner: { firstName, lastName, id: ownerId },
     description,
   },
+  onClick,
 }: Props) => {
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
+  const titleLink = pathname.indexOf('/event/') === -1;
   const id = useSelector((state: AppState) => state.userReducer.user?.id);
+  const [loading, setLoading] = useState(false);
   const upMobile = useWindowWidth() > theme.breakpoints.mobile;
   const [btnLabel, btnColor, handleClick] = setButton(
     id || '',
@@ -76,15 +92,23 @@ const ListView = ({
     attendees.map(user => user.id)
   );
 
-  const handleEventAction = useCallback(() => {
-    handleClick(eventId);
-  }, [handleClick, eventId]);
+  const handleEventAction = useCallback(async () => {
+    setLoading(true);
+    await handleClick(eventId);
+    if (onClick) onClick();
+    setLoading(false);
+  }, [handleClick, onClick, eventId]);
 
   return (
     <>
       {!upMobile ? (
         <StyledListView>
-          <Title>{title}</Title>
+          <StyledLink
+            titleLink={titleLink}
+            onClick={() => titleLink && history.push(`/event/${eventId}`)}
+          >
+            <Title>{title}</Title>
+          </StyledLink>
           <StyledDescription>
             <Description>{description}</Description>
           </StyledDescription>
@@ -98,6 +122,7 @@ const ListView = ({
               color={btnColor}
               onClick={handleEventAction}
               disabled={isExpired(startsAt)}
+              loading={loading}
             />
           </StyledFooter>
         </StyledListView>
@@ -105,7 +130,12 @@ const ListView = ({
         <StyledListView>
           <Cell width="245px" margin="0 40px 0 0">
             <StyledOverflow color={theme.palette.data}>
-              <Title fontSize={theme.typography.fontSize[18]}>{title}</Title>
+              <StyledLink
+                titleLink={titleLink}
+                onClick={() => titleLink && history.push(`/event/${eventId}`)}
+              >
+                <Title fontSize={theme.typography.fontSize[18]}>{title}</Title>
+              </StyledLink>
             </StyledOverflow>
           </Cell>
           <Cell width="240px" margin="0 40px 0 0">

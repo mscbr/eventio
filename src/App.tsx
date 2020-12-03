@@ -6,6 +6,7 @@ import { AppState } from 'store';
 import Login from 'screens/login';
 import EventsList from 'screens/eventsList';
 import CreateEvent from 'screens/createEvent';
+import EventDetail from 'screens/eventDetail';
 import Centered from 'components/centered';
 import Spinner from 'components/spinner';
 import AuthRoute from 'components/authRoute';
@@ -36,6 +37,7 @@ const App = () => {
           {!user ? <Login /> : <Redirect to="/events" />}
         </Route>
         <AuthRoute exact path="/events/:eventsFilter?" component={EventsList} />
+        <AuthRoute exact path="/event/:id" component={EventDetail} />
         <AuthRoute
           exact
           path="/event/:id/edit"

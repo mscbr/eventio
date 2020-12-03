@@ -1,4 +1,5 @@
 import React, { ReactNode, ReactNodeArray } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from 'themming';
 
@@ -18,6 +19,7 @@ const StyledHeader = styled.div`
 const StyledLogo = styled.img`
   height: 24px;
   width: 23px;
+  cursor: pointer;
 `;
 const StyledBottom = styled.div`
   position: fixed;
@@ -31,10 +33,19 @@ interface Props {
 }
 
 const ScreenLayout: React.FC<Props> = ({ children, header, bottomButton }) => {
+  const history = useHistory();
   return (
     <StyledScreenLayout>
       <StyledHeader>
-        {[<StyledLogo src={logo} alt="Logo" key="logo" />, ...(header || [''])]}
+        {[
+          <StyledLogo
+            onClick={() => history.push('/events/')}
+            src={logo}
+            alt="Logo"
+            key="logo"
+          />,
+          ...(header || ['']),
+        ]}
       </StyledHeader>
       {children}
       <StyledBottom>{bottomButton}</StyledBottom>
