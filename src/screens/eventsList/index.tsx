@@ -33,7 +33,7 @@ const StyledEventsList = styled.div<{ view?: ViewType }>`
   align-items: center;
   @media only screen and (min-width: ${theme.breakpoints.mobile}px) {
     display: ${({ view }) => (view === 'grid' ? 'grid' : 'flex')};
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
     grid-template-rows: repeat(auto-fill, auto);
     grid-gap: ${({ view }) => (view === 'grid' ? '16px' : 'inherit')};
   }

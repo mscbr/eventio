@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { formatDateFromISO, deepCompareObj } from 'shared/helpers';
@@ -20,9 +21,14 @@ const StyledGridView = styled.div`
   justify-content: flex-start;
   height: 100%;
 `;
-const StyledTitle = styled.div`
+const StyledTitle = styled.div<{ titleLink: boolean }>`
   margin: 10px 0 0 0;
   white-space: nowrap;
+  cursor: ${({ titleLink }) => (titleLink ? 'pointer' : 'initial')};
+  &:hover {
+    opacity: ${({ titleLink }) => (titleLink ? 0.8 : 1)};
+  }
+  transition: 0.3s;
 `;
 const StyledDescription = styled.div`
   margin-top: 48px;
@@ -44,6 +50,7 @@ const StyledFooter = styled.div`
 
 interface Props {
   event: IEvent;
+  onClick?: () => void;
 }
 
 const GridView = ({
@@ -56,23 +63,35 @@ const GridView = ({
     owner: { firstName, lastName, id: ownerId },
     description,
   },
+  onClick,
 }: Props) => {
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
+  const titleLink = pathname.indexOf('/event/') === -1;
   const id = useSelector((state: AppState) => state.userReducer.user?.id);
-
+  const [loading, setLoading] = useState(false);
   const [btnLabel, btnColor, handleClick] = setButton(
     id || '',
     ownerId,
     attendees.map(user => user.id)
   );
 
-  const handleEventAction = useCallback(() => {
-    handleClick(eventId);
-  }, [handleClick, eventId]);
+  const handleEventAction = useCallback(async () => {
+    setLoading(true);
+    await handleClick(eventId);
+    if (onClick) onClick();
+    setLoading(false);
+  }, [handleClick, onClick, eventId]);
 
   return (
     <StyledGridView>
       <Detail>{formatDateFromISO(startsAt)}</Detail>
-      <StyledTitle>
+      <StyledTitle
+        titleLink={titleLink}
+        onClick={() => titleLink && history.push(`/event/detail/${eventId}`)}
+      >
         <Title>{title}</Title>
       </StyledTitle>
       <Subtitle>{`${firstName} ${lastName}`}</Subtitle>
@@ -86,6 +105,7 @@ const GridView = ({
           color={btnColor}
           disabled={isExpired(startsAt)}
           onClick={handleEventAction}
+          loading={loading}
         />
       </StyledFooter>
     </StyledGridView>
